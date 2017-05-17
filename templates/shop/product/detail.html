@@ -1,0 +1,35 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+    {% if category %}{{ category.title }}{% else %}Product{% endif %}
+{% endblock title %}
+
+{% block container %}
+    <div class="container">
+    <!-- image and recomendations -->
+    <div class="col-md-4">
+        <img src="{% if product.image %}{{ product.image.url }}{% else %} {% static 'img/no_image.jpg' %}{% endif %}"
+                width="250" height="250">
+    </div>
+
+    <!-- descriptions and similarities -->
+    <div class="col-md-8">
+        <h1>{{ product.name }}</h1>
+        <h2>{% trans "Category" %}: <a href="{{product.category.get_absolute_url }}">{{ product.category }}</a> </h2>
+        <p>{% trans "Price" %}: {{ product.price }} Rwf</p>
+        <p>{% trans "Stock" %}: {{ product.stock }}</p>
+        <!-- add to cart form -->
+        <form action="{% url 'cart:add' product.id %}" method="post">
+            {% csrf_token %}
+            {{ cart_product_form }}
+            <input class="btn btn-success" type="submit" value="{% trans "Add to cart" %}">
+        </form>
+        <p>{{ product.description|linebreaks }}</p>
+
+    </div>
+    </div>
+
+{% endblock container %}

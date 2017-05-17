@@ -1,0 +1,9 @@
+/*The css for my bookmarklet*/
+
+#bookmarklet{
+    background-color: rgba(90, 89, 108, 0.64);
+    height: 500px;
+    width: 500px;
+    float: right;
+    margin-bottom: 100vh;
+}
